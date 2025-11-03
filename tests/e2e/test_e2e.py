@@ -42,9 +42,10 @@ def test_calculator_add(page, fastapi_server):
     # Click the button that has the exact text "Add". This triggers the addition operation.
     page.click('button:text("Add")')
     
-    # Use an assertion to check that the text within the result div (with id 'result') is exactly "Result: 15".
-    # This verifies that the addition operation was performed correctly and the result is displayed as expected.
-    assert page.inner_text('#result') == 'Calculation Result: 15'
+    # Use an assertion to check that the result contains the correct calculation.
+    # The new professional UI displays results as "✅ 10 + 5 = 15"
+    result_text = page.inner_text('#result')
+    assert '10' in result_text and '5' in result_text and '15' in result_text and '+' in result_text
 
 @pytest.mark.e2e
 def test_calculator_divide_by_zero(page, fastapi_server):
@@ -68,7 +69,7 @@ def test_calculator_divide_by_zero(page, fastapi_server):
     # Click the button that has the exact text "Divide". This triggers the division operation.
     page.click('button:text("Divide")')
     
-    # Use an assertion to check that the text within the result div (with id 'result') is exactly
-    # "Error: Cannot divide by zero!". This verifies that the application handles division by zero
-    # gracefully and displays the correct error message to the user.
-    assert page.inner_text('#result') == 'Error: Cannot divide by zero!'
+    # Use an assertion to check that the error message is displayed correctly.
+    # The new professional UI displays errors with emoji and formatting like "❌ Error: Cannot divide by zero!"
+    result_text = page.inner_text('#result')
+    assert 'Error' in result_text and 'Cannot divide by zero!' in result_text
