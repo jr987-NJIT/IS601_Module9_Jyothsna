@@ -42,6 +42,10 @@ def test_calculator_add(page, fastapi_server):
     # Click the button that has the exact text "Add". This triggers the addition operation.
     page.click('button:text("Add")')
     
+    # Wait for the result to be displayed (wait for the loading spinner to disappear)
+    # The page shows "⏳ Calculating..." briefly, so we wait for the actual result
+    page.wait_for_function("document.querySelector('#result').innerText.includes('15')")
+    
     # Use an assertion to check that the result contains the correct calculation.
     # The new professional UI displays results as "✅ 10 + 5 = 15"
     result_text = page.inner_text('#result')
