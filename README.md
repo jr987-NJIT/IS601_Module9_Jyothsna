@@ -1,141 +1,279 @@
-# 🧮 Professional FastAPI Calculator
+# Module 9: FastAPI + PostgreSQL + Docker Compose# 🧮 Professional FastAPI Calculator
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+
+
+> Multi-container application demonstrating Docker orchestration and SQL database operations[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115.4-009688.svg)](https://fastapi.tiangolo.com/)
-[![Tests](https://img.shields.io/badge/Tests-39%20Passing-success.svg)](https://github.com/jr987-NJIT/IS601_Module8_Jyothsna)
+
+---[![Tests](https://img.shields.io/badge/Tests-39%20Passing-success.svg)](https://github.com/jr987-NJIT/IS601_Module8_Jyothsna)
+
 [![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg)](https://github.com/jr987-NJIT/IS601_Module8_Jyothsna)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> A modern, production-ready calculator application built with FastAPI, featuring comprehensive testing, professional UI, and complete CI/CD integration.
+## 🚀 Quick Start[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## ✨ Highlights
+
+
+### Start All Services> A modern, production-ready calculator application built with FastAPI, featuring comprehensive testing, professional UI, and complete CI/CD integration.
+
+```powershell
+
+docker-compose up --build## ✨ Highlights
+
+```
 
 - 🎨 **Modern Professional UI** with gradient design and smooth animations
-- ✅ **39 Comprehensive Tests** with 100% code coverage
-- 🔒 **Security Scanning** with Trivy vulnerability detection
-- 🐳 **Docker Support** with health checks and multi-platform builds
-- 📊 **Automated CI/CD** with GitHub Actions
+
+### Access Points- ✅ **39 Comprehensive Tests** with 100% code coverage
+
+- **pgAdmin**: http://localhost:5050 (admin@admin.com / admin)- 🔒 **Security Scanning** with Trivy vulnerability detection
+
+- **FastAPI**: http://localhost:8000- 🐳 **Docker Support** with health checks and multi-platform builds
+
+- **PostgreSQL**: localhost:5432- 📊 **Automated CI/CD** with GitHub Actions
+
 - 📝 **Complete Logging** for operations tracking and debugging
+
+---
 
 ## 🎯 Features
 
+## 📚 Documentation
+
 ### Core Functionality
-- 🔢 **RESTful API** - FastAPI-based endpoints for all arithmetic operations
-- 🎨 **Modern Web Interface** - Professional gradient UI with color-coded operations
-- ⚡ **Real-time Calculations** - Instant results with visual feedback
-- 🎭 **Smart Error Handling** - User-friendly error messages with visual indicators
 
-### Testing & Quality
-- 🧪 **Unit Tests** (28 tests) - Complete coverage of all arithmetic operations
-- 🔗 **Integration Tests** (11 tests) - All API endpoints thoroughly tested
+| File | Purpose |- 🔢 **RESTful API** - FastAPI-based endpoints for all arithmetic operations
+
+|------|---------|- 🎨 **Modern Web Interface** - Professional gradient UI with color-coded operations
+
+| **[QUICK_START.md](QUICK_START.md)** | Fast 5-step guide |- ⚡ **Real-time Calculations** - Instant results with visual feedback
+
+| **[README_ASSIGNMENT.md](README_ASSIGNMENT.md)** | Complete instructions |- 🎭 **Smart Error Handling** - User-friendly error messages with visual indicators
+
+| **[SCREENSHOT_GUIDE.md](SCREENSHOT_GUIDE.md)** | Screenshot requirements |
+
+| **[REFLECTION_TEMPLATE.md](REFLECTION_TEMPLATE.md)** | Reflection writing guide |### Testing & Quality
+
+| **[SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md)** | Final verification |- 🧪 **Unit Tests** (28 tests) - Complete coverage of all arithmetic operations
+
+| **[sql_scripts.sql](sql_scripts.sql)** | All SQL commands |- 🔗 **Integration Tests** (11 tests) - All API endpoints thoroughly tested
+
 - 🎭 **E2E Tests** (3 tests) - Real user interaction testing with Playwright
-- 📊 **100% Code Coverage** - On operations module with HTML reports
 
-### DevOps & Deployment
+---- 📊 **100% Code Coverage** - On operations module with HTML reports
+
+
+
+## 🎯 Assignment Overview### DevOps & Deployment
+
 - 🤖 **CI/CD Pipeline** - Automated testing, security scanning, and deployment
-- 🐳 **Docker Support** - Multi-platform container builds with health checks
-- 🔒 **Security Scanning** - Trivy vulnerability detection in CI/CD
-- 📝 **Comprehensive Logging** - Detailed operation tracking and error logging
 
-### User Experience
-- 📱 **Responsive Design** - Works perfectly on desktop, tablet, and mobile
-- 🎨 **Visual Feedback** - Success (green) and error (red) result indicators
-- ⌨️ **Keyboard Support** - Press Enter to calculate
-- 🎭 **Loading States** - Real-time feedback during calculations
+### Learning Objectives- 🐳 **Docker Support** - Multi-platform container builds with health checks
+
+- **CLO9**: Docker containerization and multi-service orchestration- 🔒 **Security Scanning** - Trivy vulnerability detection in CI/CD
+
+- **CLO11**: Database integration with PostgreSQL- 📝 **Comprehensive Logging** - Detailed operation tracking and error logging
+
+
+
+### Tasks### User Experience
+
+1. Set up Docker Compose (PostgreSQL + pgAdmin + FastAPI)- 📱 **Responsive Design** - Works perfectly on desktop, tablet, and mobile
+
+2. Create database tables with relationships- 🎨 **Visual Feedback** - Success (green) and error (red) result indicators
+
+3. Perform CRUD operations (Create, Read, Update, Delete)- ⌨️ **Keyboard Support** - Press Enter to calculate
+
+4. Take 14+ screenshots- 🎭 **Loading States** - Real-time feedback during calculations
+
+5. Write 2-3 page reflection
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### Deliverables
+
+- GitHub repository with all files### Prerequisites
+
+- Word/PDF with screenshots and reflection
 
 - Python 3.10 or higher
-- Git
+
+---- Git
+
 - Docker (optional, for containerized deployment)
+
+## 🏗️ Architecture
 
 ### Installation
 
-1. **Clone the repository:**
-
-```bash
-git clone https://github.com/jr987-NJIT/IS601_Module8_Jyothsna.git
-cd IS601_Module8_Jyothsna
 ```
 
-2. **Create and activate a virtual environment:**
+Docker Compose1. **Clone the repository:**
+
+├── PostgreSQL (port 5432)
+
+├── pgAdmin (port 5050)```bash
+
+└── FastAPI (port 8000)git clone https://github.com/jr987-NJIT/IS601_Module8_Jyothsna.git
+
+```cd IS601_Module8_Jyothsna
+
+```
+
+### Database Schema
+
+- **users**: id, username, email, created_at2. **Create and activate a virtual environment:**
+
+- **calculations**: id, operation, operand_a, operand_b, result, timestamp, user_id (FK)
 
 **Windows (PowerShell):**
-```powershell
+
+---```powershell
+
 python -m venv venv
-.\venv\Scripts\Activate.ps1
+
+## 🔧 pgAdmin Connection.\venv\Scripts\Activate.ps1
+
 ```
 
+**Important**: Use `db` as hostname (NOT localhost)
+
 **Mac/Linux:**
-```bash
-python -m venv venv
-source venv/bin/activate
-```
+
+- Host: `db````bash
+
+- Port: `5432`python -m venv venv
+
+- Database: `fastapi_db`source venv/bin/activate
+
+- Username: `postgres````
+
+- Password: `postgres`
 
 3. **Install dependencies:**
 
+---
+
 ```bash
-pip install -r requirements.txt
+
+## 📸 Required Screenshots (14 minimum)pip install -r requirements.txt
+
 ```
 
-4. **Install Playwright browsers (for E2E tests):**
+1. Docker containers running
 
-```bash
-playwright install chromium
-```
+2. pgAdmin login4. **Install Playwright browsers (for E2E tests):**
 
-### Running the Application
+3. pgAdmin dashboard
 
-**Start the FastAPI server:**
+4. Server registration```bash
 
-```bash
-python main.py
-```
+5. Server connectedplaywright install chromium
 
-Or using uvicorn directly:
+6. Query Tool```
 
-```bash
+7. CREATE TABLES
+
+8. Tables in tree### Running the Application
+
+9. INSERT records
+
+10. SELECT users**Start the FastAPI server:**
+
+11. SELECT calculations
+
+12. JOIN query```bash
+
+13. UPDATE operationpython main.py
+
+14. DELETE operation```
+
+
+
+---Or using uvicorn directly:
+
+
+
+## 📊 Grading (100 points)```bash
+
 uvicorn main:app --reload --host 127.0.0.1 --port 8000
-```
 
-The application will be available at: **http://localhost:8000**
+- GitHub Repository: 15 pts```
 
-### Running Tests
+- Screenshots: 25 pts
 
-**Run all tests:**
+- Documentation: 10 ptsThe application will be available at: **http://localhost:8000**
 
-```bash
+- Reflection: 15 pts
+
+- Functionality: 35 pts### Running Tests
+
+
+
+---**Run all tests:**
+
+
+
+## 🆘 Troubleshooting```bash
+
 pytest
-```
 
-**Run specific test suites:**
+### Services won't start?```
 
-```bash
+```powershell
+
+docker-compose down**Run specific test suites:**
+
+docker-compose up --build
+
+``````bash
+
 # Unit tests only
-pytest tests/unit/ -v
 
-# Integration tests only
+### Can't connect to database?pytest tests/unit/ -v
+
+- Use hostname: `db` (not localhost)
+
+- Check containers: `docker ps`# Integration tests only
+
 pytest tests/integration/ -v
 
-# E2E tests only
-pytest tests/e2e/ -v
+### Table already exists?
+
+```sql# E2E tests only
+
+DROP TABLE IF EXISTS calculations CASCADE;pytest tests/e2e/ -v
+
+DROP TABLE IF EXISTS users CASCADE;```
+
 ```
 
 **Run tests with coverage:**
 
+---
+
 ```bash
-pytest --cov=app --cov-report=term-missing --cov-report=html
+
+## ⏱️ Time Estimate: 2.5-3 hourspytest --cov=app --cov-report=term-missing --cov-report=html
+
 ```
 
-View the HTML coverage report by opening `htmlcov/index.html` in a browser.
+- Setup: 15 min
 
-### API Endpoints
+- SQL operations: 45 minView the HTML coverage report by opening `htmlcov/index.html` in a browser.
 
-- **GET /** - Serves the web interface
+- Screenshots: 30 min
+
+- Documentation: 90 min### API Endpoints
+
+
+
+---- **GET /** - Serves the web interface
+
 - **GET /health** - Health check endpoint (returns application status)
-- **POST /add** - Add two numbers
+
+**Start with**: [QUICK_START.md](QUICK_START.md)- **POST /add** - Add two numbers
+
 - **POST /subtract** - Subtract two numbers
 - **POST /multiply** - Multiply two numbers
 - **POST /divide** - Divide two numbers
