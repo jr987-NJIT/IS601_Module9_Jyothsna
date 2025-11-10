@@ -13,6 +13,39 @@ version: '3.8'  # Specify the version of Docker Compose syntax to use.
 
 # Services Definition
 services:
+  # Service: db (PostgreSQL Database)
+  db:
+    image: postgres:15  # Use the official PostgreSQL 15 image
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fastapi_db
+    ports:
+      - "5432:5432"  # Expose PostgreSQL on port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persist database data
+    networks:
+      - app_network
+
+  # Service: pgadmin (pgAdmin Web Interface)
+  pgadmin:
+    image: dpage/pgadmin4:latest  # Use the official pgAdmin 4 image
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com  # Default login email
+      PGADMIN_DEFAULT_PASSWORD: admin  # Default login password
+    ports:
+      - "5050:80"  # Expose pgAdmin on port 5050
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin  # Persist pgAdmin data
+    networks:
+      - app_network
+    depends_on:
+      - db
+
   # Service: web
   web:
     # Build Configuration
@@ -33,6 +66,7 @@ services:
     environment:
       - PYTHONDONTWRITEBYTECODE=1  # Prevents Python from writing `.pyc` files to disk. This ensures that only source code is maintained, keeping the container clean.
       - PYTHONUNBUFFERED=1  # Forces Python to flush the output buffer immediately. This is useful for real-time logging, ensuring that logs are visible as they are generated.
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/fastapi_db  # PostgreSQL connection string
     
     # Command Execution
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload  
@@ -42,6 +76,21 @@ services:
       # - `--host 0.0.0.0`: Binds the server to all network interfaces, making it accessible externally.
       # - `--port 8000`: Sets the port on which the server will listen inside the container.
       # - `--reload`: Enables automatic reloading of the server when code changes are detected. This is particularly useful during development for immediate feedback without manual restarts.
+    
+    networks:
+      - app_network
+    depends_on:
+      - db
+
+# Networks
+networks:
+  app_network:
+    driver: bridge
+
+# Volumes
+volumes:
+  postgres_data:
+  pgadmin_data:
 
 # ---------------------------------------------
 # Detailed Explanation of Each Component
