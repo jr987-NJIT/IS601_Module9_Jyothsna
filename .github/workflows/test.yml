@@ -37,11 +37,15 @@ jobs:
          pytest tests/unit/ -v --cov=app --cov-report=term-missing --cov-report=html --junitxml=test-results/junit-unit.xml
 
      - name: Run Integration Tests
+       env:
+         DB_ENABLED: "false"
        run: |
          source venv/bin/activate
          pytest tests/integration/ -v --junitxml=test-results/junit-integration.xml
 
      - name: Run E2E Tests
+       env:
+         DB_ENABLED: "false"
        run: |
          source venv/bin/activate
          pytest tests/e2e/ -v --junitxml=test-results/junit-e2e.xml

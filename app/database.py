@@ -9,9 +9,16 @@ import os
 # Get database URL from environment variable
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@db:5432/fastapi_db")
 
-# Create SQLAlchemy engine
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Database availability flag
+DB_ENABLED = os.getenv("DB_ENABLED", "true").lower() == "true"
+
+# Create SQLAlchemy engine only if database is enabled
+if DB_ENABLED:
+    engine = create_engine(DATABASE_URL)
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+else:
+    engine = None
+    SessionLocal = None
 
 # Base class for models
 Base = declarative_base()
@@ -45,6 +52,9 @@ class Calculation(Base):
 
 # Function to get database session
 def get_db():
+    if not DB_ENABLED or SessionLocal is None:
+        yield None
+        return
     db = SessionLocal()
     try:
         yield db
@@ -53,4 +63,5 @@ def get_db():
 
 # Function to initialize database
 def init_db():
-    Base.metadata.create_all(bind=engine)
+    if DB_ENABLED and engine is not None:
+        Base.metadata.create_all(bind=engine)

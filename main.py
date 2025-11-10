@@ -89,6 +89,10 @@ def save_calculation_to_db(db: Session, username: str, operation: str, a: float,
     Helper function to save calculation to database.
     Creates user if doesn't exist, then saves calculation.
     """
+    # If database is not available, return None
+    if db is None:
+        return None
+    
     try:
         # Check if user exists, create if not
         user = db.query(User).filter(User.username == username).first()
@@ -128,10 +132,11 @@ async def add_route(operation: OperationRequest, db: Session = Depends(get_db)):
         result = add(operation.a, operation.b)
         calc_id = save_calculation_to_db(db, operation.username, "add", operation.a, operation.b, result)
         logger.info(f"Add operation successful: {operation.a} + {operation.b} = {result}")
+        message = f"Addition saved to database (ID: {calc_id})" if calc_id else "Addition completed (database not available)"
         return OperationResponse(
             result=result, 
             calculation_id=calc_id,
-            message=f"Addition saved to database (ID: {calc_id})"
+            message=message
         )
     except Exception as e:
         logger.error(f"Add Operation Error: {str(e)}")
@@ -147,10 +152,11 @@ async def subtract_route(operation: OperationRequest, db: Session = Depends(get_
         result = subtract(operation.a, operation.b)
         calc_id = save_calculation_to_db(db, operation.username, "subtract", operation.a, operation.b, result)
         logger.info(f"Subtract operation successful: {operation.a} - {operation.b} = {result}")
+        message = f"Subtraction saved to database (ID: {calc_id})" if calc_id else "Subtraction completed (database not available)"
         return OperationResponse(
             result=result,
             calculation_id=calc_id,
-            message=f"Subtraction saved to database (ID: {calc_id})"
+            message=message
         )
     except Exception as e:
         logger.error(f"Subtract Operation Error: {str(e)}")
@@ -166,10 +172,11 @@ async def multiply_route(operation: OperationRequest, db: Session = Depends(get_
         result = multiply(operation.a, operation.b)
         calc_id = save_calculation_to_db(db, operation.username, "multiply", operation.a, operation.b, result)
         logger.info(f"Multiply operation successful: {operation.a} * {operation.b} = {result}")
+        message = f"Multiplication saved to database (ID: {calc_id})" if calc_id else "Multiplication completed (database not available)"
         return OperationResponse(
             result=result,
             calculation_id=calc_id,
-            message=f"Multiplication saved to database (ID: {calc_id})"
+            message=message
         )
     except Exception as e:
         logger.error(f"Multiply Operation Error: {str(e)}")
@@ -185,10 +192,11 @@ async def divide_route(operation: OperationRequest, db: Session = Depends(get_db
         result = divide(operation.a, operation.b)
         calc_id = save_calculation_to_db(db, operation.username, "divide", operation.a, operation.b, result)
         logger.info(f"Divide operation successful: {operation.a} / {operation.b} = {result}")
+        message = f"Division saved to database (ID: {calc_id})" if calc_id else "Division completed (database not available)"
         return OperationResponse(
             result=result,
             calculation_id=calc_id,
-            message=f"Division saved to database (ID: {calc_id})"
+            message=message
         )
     except ValueError as e:
         logger.error(f"Divide Operation Error: {str(e)}")
@@ -203,6 +211,9 @@ async def get_calculations(db: Session = Depends(get_db), limit: int = 10):
     """
     Get recent calculations from database.
     """
+    if db is None:
+        return {"count": 0, "calculations": [], "message": "Database not available"}
+    
     try:
         calculations = db.query(Calculation).order_by(Calculation.timestamp.desc()).limit(limit).all()
         return {
@@ -230,6 +241,9 @@ async def get_users(db: Session = Depends(get_db)):
     """
     Get all users from database.
     """
+    if db is None:
+        return {"count": 0, "users": [], "message": "Database not available"}
+    
     try:
         users = db.query(User).all()
         return {
