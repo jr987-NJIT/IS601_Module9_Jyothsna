@@ -8,6 +8,7 @@ from fastapi.exceptions import RequestValidationError
 from app.operations import add, subtract, multiply, divide
 from app.database import get_db, init_db, User, Calculation
 from sqlalchemy.orm import Session
+from typing import Optional
 import uvicorn
 import logging
 
@@ -42,7 +43,7 @@ class OperationRequest(BaseModel):
 # Pydantic model for successful response
 class OperationResponse(BaseModel):
     result: float = Field(..., description="The result of the operation")
-    calculation_id: int = Field(None, description="Database ID of the calculation")
+    calculation_id: Optional[int] = Field(None, description="Database ID of the calculation")
     message: str = Field(default="Operation completed successfully")
 
 # Pydantic model for error response
